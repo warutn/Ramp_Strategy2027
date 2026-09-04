@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai AirAsia - Ramp and GSE 2027 Strategy (3 Slides)</title>
+    <style>
+        :root {
+            --airasia-red: #ED1C24;
+            --airasia-dark: #1A1A1A;
+            --airasia-grey: #636E72;
+            --airasia-light-grey: #F8F9FA;
+            --airasia-border: #E2E8F0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0F172A;
+            color: var(--airasia-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+        .deck-container {
+            width: 100%;
+            max-width: 1120px;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        /* Slide Frame - 16:9 Aspect Ratio */
+        .slide {
+            background: var(--white);
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            padding: 46px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-top: 6px solid var(--airasia-red);
+        }
+
+        /* Header Elements */
+        .slide-header {
+            margin-bottom: 20px;
+        }
+
+        .category-kicker {
+            color: var(--airasia-red);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .slide-title {
+            font-size: 27px;
+            font-weight: 800;
+            color: var(--airasia-dark);
+            line-height: 1.25;
+            margin-bottom: 6px;
+        }
+
+        .slide-subtitle {
+            font-size: 14.5px;
+            color: var(--airasia-grey);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Slide Content Area */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        /* 3-Card Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--airasia-light-grey);
+            border: 1px solid var(--airasia-border);
+            border-radius: 6px;
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .card.highlighted {
+            background: var(--white);
+            border-top: 4px solid var(--airasia-red);
+            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.08);
+        }
+
+        .card-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--airasia-red);
+            margin-bottom: 10px;
+        }
+
+        .card-headline {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--airasia-dark);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: #4A5568;
+            line-height: 1.55;
+        }
+
+        .card-metric {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--airasia-red);
+            margin-top: 14px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .card-metric span {
+            font-size: 12px;
+            color: var(--airasia-grey);
+            font-weight: 600;
+        }
+
+        /* 2-Column Splits */
+        .col-left-48 {
+            flex: 0 0 48%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .col-right-52 {
+            flex: 0 0 calc(52% - 24px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .compare-box {
+            border: 1px solid var(--airasia-border);
+            border-radius: 6px;
+            padding: 14px 18px;
+            background: var(--white);
+        }
+
+        .compare-box.legacy {
+            background: #F1F5F9;
+            border-left: 4px solid var(--airasia-grey);
+        }
+
+        .compare-box.future {
+            background: #FFF5F5;
+            border-left: 4px solid var(--airasia-red);
+        }
+
+        .ratio-bar-container {
+            background: var(--white);
+            border: 1px solid var(--airasia-border);
+            border-radius: 6px;
+            padding: 18px;
+        }
+
+        .ratio-bar {
+            display: flex;
+            height: 26px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 12px 0 8px 0;
+        }
+
+        .seg-perm { background: #1A1A1A; width: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+        .seg-cont { background: #636E72; width: 25%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+        .seg-out { background: var(--airasia-red); width: 25%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+
+        .ratio-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--airasia-grey);
+            font-weight: 600;
+        }
+
+        /* Footer Ribbon */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--airasia-border);
+            padding-top: 14px;
+            margin-top: 16px;
+        }
+
+        .footer-logo {
+            font-weight: 900;
+            font-size: 17px;
+            color: var(--airasia-red);
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: var(--airasia-dark);
+            font-weight: 500;
+            font-size: 12.5px;
+            margin-left: 8px;
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 10px;
+        }
+
+        .badge {
+            background: #F1F5F9;
+            color: #334155;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge.red {
+            background: #FEE2E2;
+            color: var(--airasia-red);
+        }
+
+        .page-num {
+            font-size: 12px;
+            color: var(--airasia-grey);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="deck-container">
+
+    <!-- SLIDE 1: Strategic Vision & Workforce Transformation -->
+    <div class="slide" id="slide-1">
+        <div>
+            <div class="slide-header">
+                <div class="category-kicker">Slide 1 • Strategic Architecture & Workforce Model</div>
+                <h1 class="slide-title">2027 Mandate: Dedicated RLS Command & Agile Workforce Framework</h1>
+                <p class="slide-subtitle">Transforming ground operations by establishing dedicated ramp leadership, tiered cost agility, and ergonomic PRM safety.</p>
+            </div>
+            <div class="slide-body">
+                <div class="col-left-48">
+                    <div class="compare-box legacy">
+                        <div style="font-size: 11px; font-weight: 800; color: #64748B; text-transform: uppercase;">Current: Dual-Hatted Headset Operator</div>
+                        <div style="font-size: 12.5px; color: #475569; margin-top: 4px; line-height: 1.4;">Headset technician forced to manage ramp supervision simultaneously. Creates severe task overload and turnaround delay vulnerability.</div>
+                    </div>
+                    <div class="compare-box future">
+                        <div style="font-size: 11px; font-weight: 800; color: var(--airasia-red); text-transform: uppercase;">2027: Dedicated Ramp Loading Supervisor (RLS)</div>
+                        <div style="font-size: 12.5px; color: #1E293B; margin-top: 4px; line-height: 1.4;">Independent airside commander responsible for loading precision, inter-departmental synchronization, safety governance, and <b>Zero Baggage Mishandling</b>.</div>
+                    </div>
+                    <div class="compare-box" style="background: #FAF5FF; border-left: 4px solid #9333EA;">
+                        <div style="font-size: 11px; font-weight: 800; color: #9333EA; text-transform: uppercase;">Silver Care PRM Modernization</div>
+                        <div style="font-size: 12px; color: #4A5568; margin-top: 4px;">Purpose-built mechanical boarding aids replacing manual lifting at outstations without aerobridges/ambulifts (Zero Workplace Injuries).</div>
+                    </div>
+                </div>
+
+                <div class="col-right-52">
+                    <div class="ratio-bar-container">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                            <div style="font-weight: 700; font-size: 15px;">Turnaround Team Deployment Architecture</div>
+                            <div style="font-size: 12px; color: var(--airasia-red); font-weight: 700;">Variable-Cost Shield</div>
+                        </div>
+                        <div class="ratio-bar">
+                            <div class="seg-perm">50% Core (2 Perm)</div>
+                            <div class="seg-cont">25% (1 Contract)</div>
+                            <div class="seg-out">25% Outsource</div>
+                        </div>
+                        <div class="ratio-legend">
+                            <div>• Permanent: Safety & Core Leadership</div>
+                            <div>• 5-Year Contract: Retention Pipeline</div>
+                            <div>• Outsource: 25–30% Peak Buffer</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-3" style="margin-top: 4px;">
+                        <div class="card" style="padding: 14px;">
+                            <div class="card-tag">Punctuality</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-dark);">OTP Lift</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">Single-point dispatch accountability</div>
+                        </div>
+                        <div class="card" style="padding: 14px;">
+                            <div class="card-tag">Baggage</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-red);">Zero Error</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">Eliminates loading mismatches</div>
+                        </div>
+                        <div class="card" style="padding: 14px;">
+                            <div class="card-tag">Fixed Cost</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-dark);">Agile Flex</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">25–30% Outsource protection</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="footer-logo">airasia <span>Ramp and GSE</span></div>
+            <div class="footer-badges">
+                <div class="badge red">RLS Leadership</div>
+                <div class="badge">Zero Mishandled Baggage</div>
+                <div class="badge">Silver Care PRM</div>
+            </div>
+            <div class="page-num">01 / 03</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Asset Consolidation & Decarbonization -->
+    <div class="slide" id="slide-2">
+        <div>
+            <div class="slide-header">
+                <div class="category-kicker">Slide 2 • Asset Synergies & Fuel Decarbonization</div>
+                <h1 class="slide-title">Asset Realignment & Green Fleet: Scaling Synergies & Slashing APU Burn</h1>
+                <p class="slide-subtitle">Capturing immediate operational efficiencies and bottom-line savings through GSE consolidation, Combo Units, and EV fleet transition.</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-3">
+                    <div class="card highlighted">
+                        <div>
+                            <div class="card-tag">Cross-Functional Integration</div>
+                            <h3 class="card-headline">ENG $\rightarrow$ Ramp GSE Handover</h3>
+                            <p class="card-text">Transfer GPU, ACU, and ASU assets + technicians to Ramp and GSE. Ramp assumes full preventive maintenance, daily checks, fueling, and FGS dispatch for APU-INOP flights.</p>
+                        </div>
+                        <div style="background: #F1F5F9; padding: 12px; border-radius: 4px; margin-top: 14px;">
+                            <div style="font-size: 10.5px; font-weight: 700; color: #475569;">ORGANIZATIONAL DIVIDEND:</div>
+                            <div style="font-size: 12px; color: #1E293B; font-weight: 600;">Frees Engineering 100% to concentrate on aircraft airworthiness and hangar turnaround.</div>
+                        </div>
+                    </div>
+
+                    <div class="card highlighted">
+                        <div>
+                            <div class="card-tag">Jet A-1 Fuel Optimization</div>
+                            <h3 class="card-headline">Combo Unit Scale-Up</h3>
+                            <p class="card-text">Deploy ground Combo Units (Ground Power + Pre-Conditioned Air) at gates to substitute aircraft APU engine operation during turnarounds.</p>
+                        </div>
+                        <div style="background: #FFF5F5; border: 1px solid #FECACA; padding: 12px; border-radius: 4px; margin-top: 14px;">
+                            <div style="font-size: 10.5px; font-weight: 700; color: var(--airasia-red);">CFO BOTTOM-LINE IMPACT:</div>
+                            <div style="font-size: 12px; color: var(--airasia-dark); font-weight: 700;">Substantial Jet A-1 fuel spend reduction & lower APU engine maintenance wear.</div>
+                        </div>
+                    </div>
+
+                    <div class="card highlighted">
+                        <div>
+                            <div class="card-tag">Fleet Modernization & ESG</div>
+                            <h3 class="card-headline">Airside EV Fleet Conversion</h3>
+                            <p class="card-text">Replace leased diesel utility pickup trucks with compact electric vehicles (EV buggies/golf carts) across short-haul airside workgroups.</p>
+                        </div>
+                        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 12px; border-radius: 4px; margin-top: 14px;">
+                            <div style="font-size: 10.5px; font-weight: 700; color: #15803D;">COMMERCIAL & GREEN WIN:</div>
+                            <div style="font-size: 12px; color: #14532D; font-weight: 700;">Directly eliminates monthly lease invoices and curtails airside carbon emissions.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="footer-logo">airasia <span>Ramp and GSE</span></div>
+            <div class="footer-badges">
+                <div class="badge red">Jet A-1 APU Savings</div>
+                <div class="badge">Zero Commercial Leases</div>
+                <div class="badge">100% ENG Focus</div>
+            </div>
+            <div class="page-num">02 / 03</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Network Synchronization & Financial Value -->
+    <div class="slide" id="slide-3">
+        <div>
+            <div class="slide-header">
+                <div class="category-kicker">Slide 3 • Network Synchronization & Financial Value</div>
+                <h1 class="slide-title">25-Station Bank Synchronization: De-Peaking Waves & Securing Margins</h1>
+                <p class="slide-subtitle">Unlocking structural labor savings by harmonizing flight banks with roster shifts and executing targeted schedule de-peaking.</p>
+            </div>
+            <div class="slide-body">
+                <div class="col-left-48">
+                    <div class="card" style="height: 100%; justify-content: flex-start; gap: 12px;">
+                        <div class="card-tag">Network Schedule De-Peaking</div>
+                        <h3 class="card-headline" style="font-size: 19px;">25-Station Flight Bank Audit</h3>
+                        <p class="card-text">Exhaustive audit matching flight wave arrivals/departures against roster shift profiles across all 25 domestic outstations.</p>
+                        
+                        <div style="border-left: 3px solid var(--airasia-red); padding-left: 12px; margin-top: 6px;">
+                            <div style="font-size: 12.5px; font-weight: 700; color: var(--airasia-dark);">Tactical Re-timing (+/- 10–15 Mins)</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); line-height: 1.4;">Partner with Network Planning to de-peak overlapping flights, eliminating artificial ground surges.</div>
+                        </div>
+
+                        <div style="border-left: 3px solid #10B981; padding-left: 12px;">
+                            <div style="font-size: 12.5px; font-weight: 700; color: var(--airasia-dark);">Overtime (OT) & Shift Containment</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); line-height: 1.4;">Removes redundant shift extensions, cuts overtime expenses, and prevents unnecessary headcount growth.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-right-52">
+                    <div style="font-weight: 800; font-size: 15px; margin-bottom: 8px; color: var(--airasia-dark);">2027 Executive Value Scorecard</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="card highlighted" style="padding: 14px;">
+                            <div class="card-tag">Cost Leadership</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-dark);">Triple Cost Cut</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">• Direct APU Jet A-1 cuts<br>• Zero pickup lease costs<br>• Structural OT containment</div>
+                        </div>
+                        <div class="card highlighted" style="padding: 14px;">
+                            <div class="card-tag">Operational OTP</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-dark);">Top-Tier Dispatch</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">Dedicated RLS leadership eliminates ramp turnaround bottlenecks.</div>
+                        </div>
+                        <div class="card highlighted" style="padding: 14px;">
+                            <div class="card-tag">Quality & Safety</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-red);">Zero Error Target</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">Zero mishandled bags & zero-injury Silver Care PRM mobility.</div>
+                        </div>
+                        <div class="card highlighted" style="padding: 14px;">
+                            <div class="card-tag">Labor Agility</div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--airasia-dark);">25–30% Flex</div>
+                            <div style="font-size: 11.5px; color: var(--airasia-grey); margin-top: 4px;">Flexible outsource buffer shields margin against aviation market shifts.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="footer-logo">airasia <span>Ramp and GSE</span></div>
+            <div class="footer-badges">
+                <div class="badge red">25 Domestic Stations</div>
+                <div class="badge">Zero OT Waste</div>
+                <div class="badge">Sustainable Margins</div>
+            </div>
+            <div class="page-num">03 / 03</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
